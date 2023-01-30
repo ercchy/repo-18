@@ -1,0 +1,18 @@
+name: Restart Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment: 
+        description: Environment to be run
+        required: true
+        type: choice 
+        options:
+          - Staging 
+          - Production
+jobs: 
+  restart:
+    uses: xapo/pet-jenkins-to-gh-module/.github/workflows/restart.yml@v1.0.1
+    with:
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
+    secrets: inherit

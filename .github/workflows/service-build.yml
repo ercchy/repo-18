@@ -1,0 +1,20 @@
+name: Build Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment: 
+        description: Environment to be run
+        required: true
+        type: choice 
+        options:
+          - Staging 
+          - Production
+          
+jobs:
+  test-and-build:
+    uses: xapo/pet-jenkins-to-gh-module/.github/workflows/test-and-or-build.yml@v1.0.1
+    with:
+      BUILD_ONLY: true
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
+    secrets: inherit

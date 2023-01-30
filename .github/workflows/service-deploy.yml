@@ -1,0 +1,24 @@
+name: Deploy Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment: 
+        description: Environment to be run
+        required: true
+        type: choice 
+        options:
+          - Staging 
+          - Production
+      image_tag:
+        description: Image to deploy - latest branch if empty
+        required: false
+        type: string
+
+jobs: 
+  deploy:
+    uses: xapo/pet-jenkins-to-gh-module/.github/workflows/deploy.yml@v1.0.1
+    with:
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
+      IMAGE_TAG: ${{ github.event.inputs.image_tag }}
+    secrets: inherit

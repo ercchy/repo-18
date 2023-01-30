@@ -1,0 +1,18 @@
+name: Generate Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment: 
+        description: Environment to be run
+        required: true
+        type: choice 
+        options:
+          - Staging 
+          - Production
+jobs: 
+  generate-report:
+    uses: xapo/pet-jenkins-to-gh-module/.github/workflows/generate-report.yml@v1.0.2
+    with:
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
+    secrets: inherit

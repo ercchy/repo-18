@@ -1,0 +1,11 @@
+name: Run Unit Tests
+
+on:
+  workflow_dispatch:
+          
+jobs:
+  test-and-build:
+    uses: xapo/pet-jenkins-to-gh-module/.github/workflows/test-and-or-build.yml@v1.0.1
+    with:
+      BUILD_ONLY: false
+    secrets: inherit
